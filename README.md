@@ -1,9 +1,9 @@
-# Myproject Product Rest API
+# My Project Product Rest API
 
 The Backend Project Layout will look like this:
 
 ```
-~/environment/python-restapi-service
+~/environment/myproject-product-restapi
 ├── README.md
 └── product-management
     ├── Dockerfile
@@ -16,7 +16,7 @@ The Backend Project Layout will look like this:
 ```
 
 ## Step 1: Create Backend using Python Flask REST API
--  Create basic CRUD functionality for a product-management service
+- Create basic CRUD functionality for a product-management service
 - The Service will be triggered by developers via a web api
 ```
 | HTTP METHOD | URI                                     | ACTION                      |
@@ -36,13 +36,12 @@ $ aws codecommit create-repository --repository-name myproject-product-restapi
 ### Step 1.2: Clone the repository
 ```
 $ cd ~/environment
-$ git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/myproject-product-restapi
+$ git clone https://git-codecommit.ap-southeast-1.amazonaws.com/v1/repos/myproject-product-restapi
 ```
-
 
 ### Step 1.3: Set up .gitignore
 ```
-$ cd ~/environment/myproject-provider-restapi
+$ cd ~/environment/myproject-product-restapi
 $ vi .gitignore
 ```
 ```
@@ -122,7 +121,7 @@ $ venv/bin/pip install flask-cors
 ```bash
 $ mkdir api
 $ cd api
-$ mkdir product
+$ mkdir products
 $ cd products
 ```
 
@@ -131,7 +130,6 @@ $ cd products
 ```bash
 $ cd ~/environment/myproject-product-restapi/products
 $ vi ~/products.json
-
 ```
 ```json
 [
@@ -171,7 +169,6 @@ from custom_logger import setup_logger
 logger = setup_logger(__name__)
 product_module = Blueprint('products', __name__)
 
-
 logger.info("Intialized product routes")
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -181,13 +178,11 @@ my_file = os.path.join(THIS_FOLDER, 'products.json')
 with open(my_file) as f:
     products = json.load(f)
 
-
 # Allow the default route to return a health check
 @product_module.route('/')
 def health_check():
     return "This a health check. Product Management Service is up and running."
 
-    
 @product_module.route('/products')
 def get_all_products():
 
@@ -222,14 +217,12 @@ def create_product():
         'image_url': product_dict['image_url']
     }
 
-
     serviceResponse = json.dumps({'products': product})
     resp = Response(serviceResponse)
 
     resp.headers["Content-Type"] = "application/json"
 
     return resp
-
 
 @product_module.route("/products/<product_id>", methods=['PUT'])
 def update_product(product_id):
@@ -260,8 +253,6 @@ def delete_product(product_id):
     resp.headers["Content-Type"] = "application/json"
 
     return resp
-
-
 ```
 
 ### Step 1.9:  Add the app.py and custom logger
@@ -286,7 +277,6 @@ app.register_blueprint(product_module)
 
 # Run the application
 app.run(host="0.0.0.0", port=8080, debug=True)
-
 ```
 
 2. File Name: **custom_logger.py**
@@ -307,7 +297,6 @@ def setup_logger(name):
     return logger
 ```
 
-
 ### Step 1.10: Run Locally and Test
 ```bash
 $ cd ~/environment/myproject-product-restapi/api
@@ -326,27 +315,16 @@ $ vi Dockerfile
 ```
 # Set base image to python
 FROM python:3.6
-
 ENV PYTHONBUFFERED 1
-
 RUN mkdir /code
-
 WORKDIR /code
-
 ADD requirements.txt /code/
-
 RUN pip install --upgrade pip
-
 RUN pip install -r requirements.txt
-
 ADD . /code/
-
 WORKDIR /code/api
-
 EXPOSE 8080
-
 ENTRYPOINT ["python"]
-
 CMD ["app.py"]
 ```
 
@@ -357,7 +335,7 @@ Replace:
 
 ```bash
 $ docker build -t myproject-product-restapi .
-$ docker tag myproject-product-restapi:latest 707538076348.dkr.ecr.us-east-1.amazonaws.com/myproject-product-restapi:latest
+$ docker tag myproject-product-restapi:latest 707538076348.dkr.ecr.ap-southeast-1.amazonaws.com/myproject-product-restapi:latest
 $ docker run -p 8000:8000 myproject-product-restapi:latest
 ```
 
