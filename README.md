@@ -338,7 +338,7 @@ Replace:
 
 ```bash
 $ docker build -t myproject-product-restapi .
-$ docker tag myproject-product-restapi:latest 707538076348.dkr.ecr.ap-southeast-1.amazonaws.com/myproject-product-restapi:latest
+$ docker tag myproject-product-restapi:latest 707538076348.dkr.ecr.us-east-1.amazonaws.com/myproject-product-restapi:latest
 $ docker run -p 5000:5000 myproject-product-restapi:latest
 ```
 
