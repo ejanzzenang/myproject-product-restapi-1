@@ -4,15 +4,15 @@ The Backend Project Layout will look like this:
 
 ```
 ~/environment/myproject-product-restapi
+├── app.py
+├── custom_logger.py
+├── product_routes.py
+├── products.json
+├── requirements.txt
+├── venv/
+├── Dockerfile
 ├── README.md
-└── product-management
-    ├── Dockerfile
-    ├── api
-    │   ├── app.py
-    │   ├── custom_logger.py
-    │   └── products
-    │       └── product_routes.py
-    └── requirements.txt
+└── .gitignore
 ```
 
 ## Step 1: Create Backend using Python Flask REST API
@@ -119,16 +119,13 @@ $ venv/bin/pip install flask-cors
 
 ### Step 1.6:  Set up directory structure
 ```bash
-$ mkdir api
-$ cd api
-$ mkdir products
-$ cd products
+$
 ```
 
 ###  Step 1.7: prepare static database
 
 ```bash
-$ cd ~/environment/myproject-product-restapi/products
+$ cd ~/environment/myproject-product-restapi
 $ vi ~/products.json
 ```
 ```json
@@ -299,7 +296,7 @@ def setup_logger(name):
 
 ### Step 1.10: Run Locally and Test
 ```bash
-$ cd ~/environment/myproject-product-restapi/api
+$ cd ~/environment/myproject-product-restapi
 $ python app.py
 $ curl http://localhost:8080
 ```
