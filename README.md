@@ -325,7 +325,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Set image's main command and run the command within the container
-EXPOSE 8080
+EXPOSE 5000
 ENTRYPOINT ["python"]
 CMD ["app.py"]
 ```
@@ -345,14 +345,14 @@ $ docker run -p 5000:5000 myproject-product-restapi:latest
 - Test Get all Products
 ```
 curl -X GET \
-  http://localhost:8080/products \
+  http://localhost:5000/products \
   -H 'Host: localhost:5000'
 ```
 
 - Test Get Product
 ```
 curl -X GET \
-  http://localhost:8080/products/d58ada00-1d53-4164-9453-b8fe3fb080c5 \
+  http://localhost:5000/products/d58ada00-1d53-4164-9453-b8fe3fb080c5 \
   -H 'Host: localhost:5000' 
 ```
 
@@ -371,7 +371,7 @@ curl -X POST \
 - Test Update Product
 ```
 curl -X PUT \
-  http://localhost:8080/products/d58ada00-1d53-4164-9453-b8fe3fb080c5 \
+  http://localhost:5000/products/d58ada00-1d53-4164-9453-b8fe3fb080c5 \
   -H 'Content-Type: application/json' \
   -d '{
   "name":"egg 123",
@@ -383,7 +383,7 @@ curl -X PUT \
 - Test Delete Product
 ```
 curl -X DELETE \
-  http://localhost:8080/products/b130f58b-c700-4bde-bad7-a1218ce60ccb \
+  http://localhost:5000/products/b130f58b-c700-4bde-bad7-a1218ce60ccb \
   -H 'Content-Type: application/json' 
 ```
 
