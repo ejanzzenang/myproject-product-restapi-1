@@ -35,7 +35,7 @@ $ aws codecommit create-repository --repository-name myproject-product-restapi
 ### Step 1.2: Clone the repository
 ```
 $ cd ~/environment
-$ git clone https://git-codecommit.ap-southeast-1.amazonaws.com/v1/repos/myproject-product-restapi
+$ git clone https://git-codecommit.us-east-1.amazonaws.com/v1/repos/myproject-product-restapi
 ```
 
 ### Step 1.3: Set up .gitignore
