@@ -218,7 +218,7 @@ def create_product():
 @product_module.route("/products/<product_id>", methods=['PUT'])
 def update_product(product_id):
     
-       #creates a new product. The product id is automatically generated.
+    #creates a new product. The product id is automatically generated.
     product_dict = json.loads(request.data)
 
     products[0]['name'] = request.json.get('name', products[0]['name'])
@@ -267,7 +267,7 @@ CORS(app)
 app.register_blueprint(product_module)
 
 # Run the application
-app.run(host="0.0.0.0", port=8080, debug=True)
+app.run(host="0.0.0.0", port=5000, debug=True)
 ```
 
 - custom_logger.py
@@ -295,7 +295,7 @@ def setup_logger(name):
 ```bash
 $ cd ~/environment/myproject-product-restapi
 $ python app.py
-$ curl http://localhost:8080
+$ curl http://localhost:5000
 ```
 
 ### (TODO) Step 1.10: Backend Unit Tests
@@ -338,7 +338,7 @@ Replace:
 ```bash
 $ docker build -t myproject-product-restapi .
 $ docker tag myproject-product-restapi:latest 707538076348.dkr.ecr.ap-southeast-1.amazonaws.com/myproject-product-restapi:latest
-$ docker run -p 8000:8000 myproject-product-restapi:latest
+$ docker run -p 5000:5000 myproject-product-restapi:latest
 ```
 
 ### Step 1.14: Test CRUD Operations
@@ -346,14 +346,14 @@ $ docker run -p 8000:8000 myproject-product-restapi:latest
 ```
 curl -X GET \
   http://localhost:8080/products \
-  -H 'Host: localhost:8080'
+  -H 'Host: localhost:5000'
 ```
 
 - Test Get Product
 ```
 curl -X GET \
   http://localhost:8080/products/d58ada00-1d53-4164-9453-b8fe3fb080c5 \
-  -H 'Host: localhost:8080' 
+  -H 'Host: localhost:5000' 
 ```
 
 - Test Create Product
