@@ -1,7 +1,6 @@
 # My Project Product Rest API
 
-The Backend Project Layout will look like this:
-
+The folder structure will look like this:
 ```
 ~/environment/myproject-product-restapi
 ├── app.py
@@ -117,13 +116,7 @@ $ venv/bin/pip install flask
 $ venv/bin/pip install flask-cors
 ```
 
-### Step 1.6:  Set up directory structure
-```bash
-$
-```
-
-###  Step 1.7: prepare static database
-
+###  Step 1.6: Prepare static database
 ```bash
 $ cd ~/environment/myproject-product-restapi
 $ vi ~/products.json
@@ -151,7 +144,11 @@ $ vi ~/products.json
 ]
 ```
 
-### Step 1.8: Add the product_routes.py
+### Step 1.7: Add product_routes.py
+```
+$ cd ~/environment/myproject-product-restapi
+$ vi ~/product_routes.py
+```
 ```python
 import os
 import uuid
@@ -249,8 +246,12 @@ def delete_product(product_id):
     return resp
 ```
 
-### Step 1.9:  Add app.py and custom_logger.py
+### Step 1.8: Add app.py and custom_logger.py
 - Add app.py
+```
+$ cd ~/environment/myproject-product-restapi
+$ vi ~/app.py
+```
 ```python
 from flask import Flask
 from flask_cors import CORS
@@ -270,6 +271,10 @@ app.run(host="0.0.0.0", port=8080, debug=True)
 ```
 
 - custom_logger.py
+```
+$ cd ~/environment/myproject-product-restapi
+$ vi ~/custom_logger.py
+```
 ```python
 import logging
 
@@ -286,14 +291,20 @@ def setup_logger(name):
     return logger
 ```
 
-### Step 1.10: Run Locally and Test
+### Step 1.9: Run Locally and Test
 ```bash
 $ cd ~/environment/myproject-product-restapi
 $ python app.py
 $ curl http://localhost:8080
 ```
 
-### (TODO) Step 1.11: Backend Unit Tests
+### (TODO) Step 1.10: Backend Unit Tests
+
+### Step 1.11: Generate requirements.txt
+```
+$ cd ~/environment/myproject-product-restapi
+$ pip freeze > requirements.txt
+```
 
 ### Step 1.12: Create the Dockerfile
 ```bash
@@ -302,15 +313,18 @@ $ vi Dockerfile
 ```
 ```
 # Set base image to python
-FROM python:3.6
+FROM python:3.7
 ENV PYTHONBUFFERED 1
-RUN mkdir /code
-WORKDIR /code
-ADD requirements.txt /code/
+
+# Copy source file and python req's
+COPY . /app
+WORKDIR /app
+
+# Install requirements
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-ADD . /code/
-WORKDIR /code/api
+
+# Set image's main command and run the command within the container
 EXPOSE 8080
 ENTRYPOINT ["python"]
 CMD ["app.py"]
@@ -334,46 +348,14 @@ curl -X GET \
   http://localhost:8080/products \
   -H 'Host: localhost:8080'
 ```
-```
-{
-    "products": [
-        {
-            "description": "Used to wash body",
-            "image_url": "https://via.placeholder.com/150",
-            "name": "Soap",
-            "product_id": "4e53920c-505a-4a90-a694-b9300791f0ae"
-        },
-        {
-            "description": "Used to wash hair",
-            "image_url": "https://via.placeholder.com/150",
-            "name": "Shampoo",
-            "product_id": "2b473002-36f8-4b87-954e-9a377e0ccbec"
-        },
-        {
-            "description": "thin, soft paper, typically used for wrapping or protecting fragile or delicate articles.",
-            "image_url": "https://via.placeholder.com/150",
-            "name": "Tissue",
-            "providerId": "3f0f196c-4a7b-43af-9e29-6522a715342d"
-        }
-    ]
-}
-```
+
 - Test Get Product
 ```
 curl -X GET \
   http://localhost:8080/products/d58ada00-1d53-4164-9453-b8fe3fb080c5 \
   -H 'Host: localhost:8080' 
 ```
-```
-{
-    "products": {
-        "description": "Used to wash body",
-        "image_url": "https://via.placeholder.com/150",
-        "name": "Soap",
-        "product_id": "4e53920c-505a-4a90-a694-b9300791f0ae"
-    }
-}
-```
+
 - Test Create Product
 ```
 curl -X POST \
@@ -385,16 +367,7 @@ curl -X POST \
   "image_url": "https://via.placeholder.com/200"
 }'
 ```
-```
-{
-    "products": {
-        "description": "Nulla nec dolor a ipsum viverra tincidunt eleifend id orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
-        "image_url": "https://via.placeholder.com/200",
-        "name": "Product G",
-        "product_id": "e5870573-a9f0-49ee-bee3-d491bcfa5cf1"
-    }
-}
-```
+
 - Test Update Product
 ```
 curl -X PUT \
@@ -406,27 +379,12 @@ curl -X PUT \
   "image_url": "product_image testes update test"
 }'
 ```
-```
-{
-    "products": {
-        "description": "my working description dasdasds",
-        "image_url": "product_image testes update test",
-        "name": "egg 123",
-        "product_id": "4e53920c-505a-4a90-a694-b9300791f0ae"
-    }
-}
-```
 
 - Test Delete Product
 ```
 curl -X DELETE \
   http://localhost:8080/products/b130f58b-c700-4bde-bad7-a1218ce60ccb \
   -H 'Content-Type: application/json' 
-```
-```
-{  
-"response":"Deletes a product with id: b130f58b-c700-4bde-bad7-a1218ce60ccb"  
-}
 ```
 
 ### Step 1.15: Create the ECR Repository
