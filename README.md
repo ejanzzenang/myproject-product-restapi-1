@@ -143,7 +143,7 @@ $ vi ~/products.json
     "image_url": "https://via.placeholder.com/150"
   },
   {
-    "providerId": "3f0f196c-4a7b-43af-9e29-6522a715342d",
+    "product_id": "3f0f196c-4a7b-43af-9e29-6522a715342d",
     "name": "Tissue",
     "description": "thin, soft paper, typically used for wrapping or protecting fragile or delicate articles.",
     "image_url": "https://via.placeholder.com/150"
@@ -151,10 +151,7 @@ $ vi ~/products.json
 ]
 ```
 
-### Step 1.8:  Add the routes for product management
-
-In products folder, add the ff files:
-File Name: **product_routes.py**
+### Step 1.8: Add the product_routes.py
 ```python
 import os
 import uuid
@@ -252,12 +249,8 @@ def delete_product(product_id):
     return resp
 ```
 
-### Step 1.9:  Add the app.py and custom logger
-
-In products folder, add the ff files:
-
-1. File Name: **app.py**
-
+### Step 1.9:  Add app.py and custom_logger.py
+- Add app.py
 ```python
 from flask import Flask
 from flask_cors import CORS
@@ -276,8 +269,7 @@ app.register_blueprint(product_module)
 app.run(host="0.0.0.0", port=8080, debug=True)
 ```
 
-2. File Name: **custom_logger.py**
-
+- custom_logger.py
 ```python
 import logging
 
@@ -301,8 +293,7 @@ $ python app.py
 $ curl http://localhost:8080
 ```
 
-### Step 1.11: Backend Unit Tests
-Todo
+### (TODO) Step 1.11: Backend Unit Tests
 
 ### Step 1.12: Create the Dockerfile
 ```bash
