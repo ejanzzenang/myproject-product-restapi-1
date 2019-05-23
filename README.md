@@ -356,7 +356,7 @@ curl -X GET \
 - Test Get Product
 ```
 curl -X GET \
-  http://localhost:5000/products/d58ada00-1d53-4164-9453-b8fe3fb080c5 \
+  http://localhost:5000/products/4e53920c-505a-4a90-a694-b9300791f0ae \
   -H 'Host: localhost:5000' 
 ```
 
@@ -375,7 +375,7 @@ curl -X POST \
 - Test Update Product
 ```
 curl -X PUT \
-  http://localhost:5000/products/d58ada00-1d53-4164-9453-b8fe3fb080c5 \
+  http://localhost:5000/products/4e53920c-505a-4a90-a694-b9300791f0ae \
   -H 'Content-Type: application/json' \
   -d '{
   "name":"egg 123",
@@ -387,7 +387,7 @@ curl -X PUT \
 - Test Delete Product
 ```
 curl -X DELETE \
-  http://localhost:5000/products/3f0f196c-4a7b-43af-9e29-6522a715342d \
+  http://localhost:5000/products/4e53920c-505a-4a90-a694-b9300791f0ae \
   -H 'Content-Type: application/json' 
 ```
 
