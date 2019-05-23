@@ -387,22 +387,30 @@ curl -X DELETE \
   -H 'Content-Type: application/json' 
 ```
 
-### Step 1.15: Create the ECR Repository
+### Step 1.15: Push to Remote Repository
+```
+$ cd ~/environment/myproject-product-restapi
+$ git add .
+$ git commit -m "Initial Commit"
+$ git push origin master
+```
+
+### Step 1.16: Create the ECR Repository
 ```
 $ aws ecr create-repository --repository-name myproject-product-restapi
 ```
 
-### Step 1.16: Run login command to retrieve credentials for our Docker client and then automatically execute it (include the full command including the $ below).
+### Step 1.17: Run login command to retrieve credentials for our Docker client and then automatically execute it (include the full command including the $ below).
 ```
 $ $(aws ecr get-login --no-include-email)
 ```
 
-### Step 1.17: Push our Docker Image
+### Step 1.18: Push our Docker Image
 ```
 $ docker push 707538076348.dkr.ecr.us-east-1.amazonaws.com/myproject-product-restapi:latest
 ```
 
-### Step 1.18: Validate Image has been pushed
+### Step 1.19: Validate Image has been pushed
 ```
 $ aws ecr describe-images --repository-name myproject-product-restapi
 ```
