@@ -156,7 +156,7 @@ from flask import Blueprint
 from flask import Flask, json, Response, request
 from custom_logger import setup_logger
 
-# Set up the custom logger and the Blueprint
+# set up the custom logger and the Blueprint
 logger = setup_logger(__name__)
 product_module = Blueprint('products', __name__)
 
@@ -169,7 +169,7 @@ my_file = os.path.join(THIS_FOLDER, 'products.json')
 with open(my_file) as f:
     products = json.load(f)
 
-# Allow the default route to return a health check
+# allow the default route to return a health check
 @product_module.route('/')
 def health_check():
     return "This a health check. Product Management Service is up and running."
@@ -199,6 +199,7 @@ def get_product(product_id):
 @product_module.route("/products", methods=['POST'])
 def create_product():
 
+    #creates a new product. The product id is automatically generated.
     product_dict = json.loads(request.data)
 
     product = {
@@ -218,7 +219,7 @@ def create_product():
 @product_module.route("/products/<product_id>", methods=['PUT'])
 def update_product(product_id):
     
-    #creates a new product. The product id is automatically generated.
+    #updates am existing product 
     product_dict = json.loads(request.data)
 
     products[0]['name'] = request.json.get('name', products[0]['name'])
@@ -359,7 +360,7 @@ curl -X GET \
 - Test Create Product
 ```
 curl -X POST \
-  http://localhost:8080/products \
+  http://localhost:5000/products \
   -H 'Content-Type: application/json' \
   -d '{
   "name":"Product G",
@@ -383,7 +384,7 @@ curl -X PUT \
 - Test Delete Product
 ```
 curl -X DELETE \
-  http://localhost:5000/products/b130f58b-c700-4bde-bad7-a1218ce60ccb \
+  http://localhost:5000/products/3f0f196c-4a7b-43af-9e29-6522a715342d \
   -H 'Content-Type: application/json' 
 ```
 
