@@ -119,7 +119,7 @@ $ venv/bin/pip install flask-cors
 ###  Step 1.6: Prepare static database
 ```bash
 $ cd ~/environment/myproject-product-restapi
-$ vi ~/products.json
+$ vi products.json
 ```
 ```json
 [
@@ -147,7 +147,7 @@ $ vi ~/products.json
 ### Step 1.7: Add product_routes.py
 ```
 $ cd ~/environment/myproject-product-restapi
-$ vi ~/product_routes.py
+$ vi product_routes.py
 ```
 ```python
 import os
@@ -250,7 +250,7 @@ def delete_product(product_id):
 - Add app.py
 ```
 $ cd ~/environment/myproject-product-restapi
-$ vi ~/app.py
+$ vi app.py
 ```
 ```python
 from flask import Flask
@@ -273,7 +273,7 @@ app.run(host="0.0.0.0", port=8080, debug=True)
 - custom_logger.py
 ```
 $ cd ~/environment/myproject-product-restapi
-$ vi ~/custom_logger.py
+$ vi custom_logger.py
 ```
 ```python
 import logging
