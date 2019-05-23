@@ -257,7 +257,7 @@ from flask import Flask
 from flask_cors import CORS
 
 # Add new blueprints here
-from products.product_routes import product_module
+from product_routes import product_module
 
 # Initialize the flask application
 app = Flask(__name__)
