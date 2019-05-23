@@ -95,6 +95,9 @@ instance/
 # Virtual environment
 venv
 *.pyc
+
+# IDE
+.vscode
 ```
 
 ### Step 1.4: Test access to repo by adding README.md file and push to remote repository
